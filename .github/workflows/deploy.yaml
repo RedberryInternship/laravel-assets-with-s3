@@ -17,8 +17,7 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/.ssh/id_rsa
           chmod 600 $HOME/.ssh/id_rsa
       - name: Deploy
-        run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@35.158.106.188 "cd laravel && git pull origin master"
+        run: ssh -o StrictHostKeyChecking=no ubuntu@35.158.106.188 "cd laravel && git pull origin master"
       
       - name: Setup aws credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -27,5 +26,5 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-central-1
 
-      - name: Test aws cli
-        run: aws s3 ls
+      - name: Deploy assets to s3
+        run: aws s3 sync ./laravel/public s3://laravel-assets-with-s3 --delete
