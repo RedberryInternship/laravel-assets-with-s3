@@ -1,5 +1,4 @@
 name: Deploy
-description:  Deploy to AWS EC2
 
 on: 
   push:
