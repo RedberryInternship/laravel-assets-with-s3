@@ -18,4 +18,4 @@ jobs:
           chmod 600 $HOME/.ssh/id_rsa
       - name: Deploy
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@35.158.106.188 "whoami"
+          ssh -o StrictHostKeyChecking=no ubuntu@35.158.106.188 "cd laravel && git pull origin master"
